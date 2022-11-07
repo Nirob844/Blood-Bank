@@ -31,7 +31,7 @@ struct donorsList
     char bloodGroup[20];
     int numberOfBloodD;
     int dd,mm,yy;
-    int phNumber;
+    long long int phNumber;
     char email[30];
     char *cat;
 };
@@ -62,10 +62,8 @@ void mainMenu()
     printf("\xDB\xDB\xDB\xDB\xB2 3. Search Donors");
     gotoxy(20,11);
     printf("\xDB\xDB\xDB\xDB\xB2 4. Close Application");
-    gotoxy(20,19);
-    printf("------------------------------------------");
-    gotoxy(20,21);
-    printf("Enter your choice:");
+
+
     switch(getch())
     {
         case '1':
@@ -92,8 +90,16 @@ void mainMenu()
         if(getch())
         mainMenu();
         }
-
     }
+    gotoxy(20,19);
+    printf("------------------------------------------");
+    gotoxy(20,21);
+    printf("Enter your choice:");
+        gotoxy(38,21);
+ scanf("%d",&s);
+    if(s==4)
+    mainMenu() ;
+
 }
 
 
@@ -140,10 +146,7 @@ void addNewDonors(void)    //funtion that add donors
 {
     system("cls");
     int i;
-    printf("Enter your choice:");
-    scanf("%d",&s);
-    if(s==4)
-    mainMenu() ;
+
     system("cls");
     fp=fopen("Bibek.dat","ab+");
     if(getdata()==1)
@@ -168,31 +171,37 @@ int getdata()
     gotoxy(20,3);
     printf("Enter the Information Below");
     gotoxy(20,4);
-    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     gotoxy(20,5);
-    printf("\xB2");gotoxy(46,5);printf("\xB2");
+    printf("\xB2");gotoxy(66,5);printf("\xB2");
     gotoxy(20,6);
-    printf("\xB2");gotoxy(46,6);printf("\xB2");
+    printf("\xB2");gotoxy(66,6);printf("\xB2");
     gotoxy(20,7);
-    printf("\xB2");gotoxy(46,7);printf("\xB2");
+    printf("\xB2");gotoxy(66,7);printf("\xB2");
     gotoxy(20,8);
-    printf("\xB2");gotoxy(46,8);printf("\xB2");
+    printf("\xB2");gotoxy(66,8);printf("\xB2");
     gotoxy(20,9);
-    printf("\xB2");gotoxy(46,9);printf("\xB2");
+    printf("\xB2");gotoxy(66,9);printf("\xB2");
     gotoxy(20,10);
-    printf("\xB2");gotoxy(46,10);printf("\xB2");
+    printf("\xB2");gotoxy(66,10);printf("\xB2");
     gotoxy(20,11);
-    printf("\xB2");gotoxy(46,11);printf("\xB2");
+    printf("\xB2");gotoxy(66,11);printf("\xB2");
     gotoxy(20,12);
-    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+    printf("\xB2");gotoxy(66,12);printf("\xB2");
+    gotoxy(20,13);
+    printf("\xB2");gotoxy(66,13);printf("\xB2");
+    gotoxy(20,14);
+    printf("\xB2");gotoxy(66,14);printf("\xB2");
+    gotoxy(20,18);
+    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     gotoxy(21,5);
     printf("Information of donors:");
     gotoxy(31,5);
     gotoxy(21,6);
-    printf("Book ID:\t");
-    gotoxy(30,6);
+    printf("Donar Id ID:\t");
+    gotoxy(33,6);
     scanf("%d",&storeId);
     if(checkid(storeId) == 0)
     {
@@ -207,19 +216,27 @@ int getdata()
     printf("Donor Name:");gotoxy(33,7);
     scanf("%s",a.name);
     gotoxy(21,8);
-    printf("Blood Group:");gotoxy(30,8);
+    printf("Blood Group:");gotoxy(34,8);
     scanf("%s",a.bloodGroup);
     gotoxy(21,9);
-    printf("Number Of Blood Donation:");gotoxy(31,9);
+    printf("Number Of Blood Donation:");gotoxy(46,9);
     scanf("%d",&a.numberOfBloodD);
-    gotoxy(21,10);
-    printf(" Last Date of Blood Donation:");gotoxy(28,10);
-    scanf("%d %d %d",&a.dd,a.mm,a.yy);
+  /*  gotoxy(21,10);
+    printf("Last Date of Blood Donation:");gotoxy(50,10);
+    scanf("%d ",&a.dd);
+    gotoxy(51,10);
+    printf("/");
+    gotoxy(52,10);
+    scanf("%d ",&a.mm);
+    gotoxy(53,10);
+    printf("/");
+    gotoxy(54,10);
+    scanf("%d ",&a.yy);*/
     gotoxy(21,11);
-    printf("Enter Phone number:");gotoxy(31,9);
-    scanf("%d",&a.phNumber);
-    gotoxy(21,11);
-    printf("Enter your email:");gotoxy(30,11);
+    printf("Enter Phone number:");gotoxy(40,11);
+    scanf("%lld",&a.phNumber);
+    gotoxy(21,12);
+    printf("Enter your email:");gotoxy(39,12);
     scanf("%s",&a.email);
     return 1;
 }
@@ -235,10 +252,14 @@ void viewListOfDonor(void)    //funtion that add books
 {
     system("cls");
     printf("This is view list of donors");
+    getch();
+    mainMenu() ;
 }
 void searchDonor(void)    //funtion that add books
 {
     system("cls");
     printf("This is search donors");
+    getch();
+    mainMenu() ;
 }
 
