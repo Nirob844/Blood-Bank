@@ -248,13 +248,7 @@ int checkid(int storeId)  //check whether the book is exist in library or not
     return 0;  //returns 0 if book exits
     return 1; //return 1 if it not
 }
-void viewListOfDonor(void)    //funtion that add books
-{
-    system("cls");
-    printf("This is view list of donors");
-    getch();
-    mainMenu() ;
-}
+
 void searchDonor(void)    //funtion that add books
 {
     system("cls");
@@ -262,4 +256,50 @@ void searchDonor(void)    //funtion that add books
     getch();
     mainMenu() ;
 }
-
+void viewListOfDonor(void)    //funtion that add books
+{
+   int i=0,j;
+    system("cls");
+    gotoxy(1,1);
+    printf("*********************************Donor List*****************************");
+    gotoxy(2,2);
+    printf("     ID    DONAR NAME     BLOOD GROUP       N.OF DONATION     PH.NUMBER     EMAIL ");
+    j=4;
+    fp=fopen("Bibek.dat","rb");
+    while(fread(&a,sizeof(a),1,fp)==1)
+    {
+    gotoxy(3,j);
+    printf("%s",a.cat);
+    gotoxy(16,j);
+    printf("%d",a.id);
+    gotoxy(22,j);
+    printf("%s",a.name);
+    gotoxy(36,j);
+    printf("%s",a.bloodGroup);
+    gotoxy(50,j);
+    printf("%d",a.numberOfBloodD);
+    gotoxy(57,j);
+    printf("%lf",a.phNumber);
+    gotoxy(69,j);
+    printf("%s",a.email);
+    printf("\n\n");
+    j++;
+    //i=i+a.numberOfBloodD;
+      }
+    /*  gotoxy(3,25);
+      printf("Total list =%d",i);
+      fclose(fp);
+      gotoxy(35,25);
+      returnfunc();*/
+}
+void returnfunc(void)
+{
+    {
+    printf(" Press ENTER to return to main menu");
+    }
+    a:
+    if(getch()==13) //allow only use of enter
+    mainMenu();
+    else
+    goto a;
+}
