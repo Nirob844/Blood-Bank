@@ -44,7 +44,6 @@ int main()
       Password();
       getch();
    return 0;
-
 }
 void mainmenu()
 {
@@ -62,7 +61,6 @@ void mainmenu()
     printf("\xDB\xDB\xDB\xDB\xB2 3. Search Donors");
     gotoxy(20,11);
     printf("\xDB\xDB\xDB\xDB\xB2 4. Close Application");
-
 
     switch(getch())
     {
@@ -99,7 +97,6 @@ void mainmenu()
  scanf("%d",&s);
     if(s==4)
     mainmenu() ;
-
 }
 
 
@@ -146,7 +143,6 @@ void addNewDonors(void)    //funtion that add donors
 {
     system("cls");
     int i;
-
     system("cls");
     fp=fopen("Bibek.dat","ab+");
     if(getdata()==1)
@@ -263,34 +259,34 @@ void viewListOfDonor(void)    //funtion that add books
     gotoxy(1,1);
     printf("*********************************Donor List*****************************");
     gotoxy(2,2);
-    printf("     ID    DONAR NAME     BLOOD GROUP       N.OF DONATION     PH.NUMBER     EMAIL ");
+    printf("     ID    DONAR NAME     BLOOD GROUP       N.OF DONATION     PH.NUMBER      EMAIL ");
     j=4;
     fp=fopen("Bibek.dat","rb");
     while(fread(&a,sizeof(a),1,fp)==1)
     {
     gotoxy(3,j);
-    printf("%s",a.cat);
-    gotoxy(16,j);
+    //printf("%s",a.cat);
+    gotoxy(8,j);
     printf("%d",a.id);
-    gotoxy(22,j);
+    gotoxy(15,j);
     printf("%s",a.name);
-    gotoxy(36,j);
+    gotoxy(31,j);
     printf("%s",a.bloodGroup);
-    gotoxy(50,j);
+    gotoxy(52,j);
     printf("%d",a.numberOfBloodD);
-    gotoxy(57,j);
-    printf("%lf",a.phNumber);
-    gotoxy(69,j);
+    gotoxy(64,j);
+    printf("%lld",a.phNumber);
+    gotoxy(76,j);
     printf("%s",a.email);
     printf("\n\n");
     j++;
     //i=i+a.numberOfBloodD;
       }
     /*  gotoxy(3,25);
-      printf("Total list =%d",i);
+      printf("Total list =%d",i);*/
       fclose(fp);
       gotoxy(35,25);
-      returnfunc();*/
+      returnfunc();
 }
 void returnfunc(void)
 {
