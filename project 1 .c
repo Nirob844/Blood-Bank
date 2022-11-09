@@ -4,7 +4,7 @@
 
 
 void Password();
-void mainMenu(void);
+void mainmenu(void);
 void addNewDonors(void);
 void viewListOfDonor(void);
 void searchDonor(void);
@@ -18,7 +18,7 @@ void gotoxy (int x, int y)
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
-char password[10]={"project"};
+char password[10]={"nirob"};
 
 
 FILE *fp;
@@ -46,7 +46,7 @@ int main()
    return 0;
 
 }
-void mainMenu()
+void mainmenu()
 {
     system("cls");
     system("COLOR F2");
@@ -88,7 +88,7 @@ void mainMenu()
         gotoxy(10,23);
         printf("\aWrong Entry!!Please re-entered correct option");
         if(getch())
-        mainMenu();
+        mainmenu();
         }
     }
     gotoxy(20,19);
@@ -98,7 +98,7 @@ void mainMenu()
         gotoxy(38,21);
  scanf("%d",&s);
     if(s==4)
-    mainMenu() ;
+    mainmenu() ;
 
 }
 
@@ -132,7 +132,7 @@ void Password(void) //for password option
 	gotoxy(17,10);
 	printf("Press any key to countinue.....");
 	getch();
-	mainMenu();
+	mainmenu();
    }
    else
    {
@@ -159,7 +159,7 @@ void addNewDonors(void)    //funtion that add donors
     gotoxy(21,15);
     printf("Save any more?(Y / N):");
     if(getch()=='n')
-        mainMenu();
+        mainmenu();
     else
         system("cls");
         addNewDonors();
@@ -167,7 +167,7 @@ void addNewDonors(void)    //funtion that add donors
 }
 int getdata()
 {
-    int storeId;
+    int t;
     gotoxy(20,3);
     printf("Enter the Information Below");
     gotoxy(20,4);
@@ -202,16 +202,16 @@ int getdata()
     gotoxy(21,6);
     printf("Donar Id ID:\t");
     gotoxy(33,6);
-    scanf("%d",&storeId);
-    if(checkid(storeId) == 0)
+    scanf("%d",&t);
+    if(checkid(t) == 0)
     {
         gotoxy(21,13);
         printf("\aThe book id already exists\a");
         getch();
-        mainMenu();
+        mainmenu();
         return 0;
     }
-    a.id=storeId;
+    a.id=t;
     gotoxy(21,7);
     printf("Donor Name:");gotoxy(33,7);
     scanf("%s",a.name);
@@ -240,11 +240,11 @@ int getdata()
     scanf("%s",&a.email);
     return 1;
 }
-int checkid(int storeId)  //check whether the book is exist in library or not
+int checkid(int t)  //check whether the book is exist in library or not
 {
     rewind(fp);
     while(fread(&a,sizeof(a),1,fp)==1)
-    if(a.id==storeId)
+    if(a.id==t)
     return 0;  //returns 0 if book exits
     return 1; //return 1 if it not
 }
@@ -254,7 +254,7 @@ void searchDonor(void)    //funtion that add books
     system("cls");
     printf("This is search donors");
     getch();
-    mainMenu() ;
+    mainmenu() ;
 }
 void viewListOfDonor(void)    //funtion that add books
 {
@@ -299,7 +299,7 @@ void returnfunc(void)
     }
     a:
     if(getch()==13) //allow only use of enter
-    mainMenu();
+    mainmenu();
     else
     goto a;
 }
