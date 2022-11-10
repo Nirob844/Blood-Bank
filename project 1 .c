@@ -61,6 +61,12 @@ void mainmenu()
     printf("\xDB\xDB\xDB\xDB\xB2 3. Search Donors");
     gotoxy(20,11);
     printf("\xDB\xDB\xDB\xDB\xB2 4. Close Application");
+     gotoxy(20,19);
+    printf("------------------------------------------");
+    gotoxy(20,21);
+    printf("Enter your choice:");
+        gotoxy(38,21);
+ //scanf("%d",&s);
 
     switch(getch())
     {
@@ -89,16 +95,8 @@ void mainmenu()
         mainmenu();
         }
     }
-    gotoxy(20,19);
-    printf("------------------------------------------");
-    gotoxy(20,21);
-    printf("Enter your choice:");
-        gotoxy(38,21);
- scanf("%d",&s);
-    if(s==4)
-    mainmenu() ;
-}
 
+}
 
 void Password(void) //for password option
 {
@@ -167,7 +165,7 @@ int getdata()
     gotoxy(20,3);
     printf("Enter the Information Below");
     gotoxy(20,4);
-    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     gotoxy(20,5);
     printf("\xB2");gotoxy(66,5);printf("\xB2");
@@ -189,14 +187,14 @@ int getdata()
     printf("\xB2");gotoxy(66,13);printf("\xB2");
     gotoxy(20,14);
     printf("\xB2");gotoxy(66,14);printf("\xB2");
-    gotoxy(20,18);
-    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-    gotoxy(21,5);
+    gotoxy(20,15);
+   printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+    gotoxy(26,5);
     printf("Information of donors:");
     gotoxy(31,5);
-    gotoxy(21,6);
-    printf("Donar Id ID:\t");
+    gotoxy(22,6);
+    printf("Donar  ID:\t");
     gotoxy(33,6);
     scanf("%d",&t);
     if(checkid(t) == 0)
@@ -208,14 +206,14 @@ int getdata()
         return 0;
     }
     a.id=t;
-    gotoxy(21,7);
+    gotoxy(22,7);
     printf("Donor Name:");gotoxy(33,7);
     scanf("%s",a.name);
-    gotoxy(21,8);
+    gotoxy(22,8);
     printf("Blood Group:");gotoxy(34,8);
     scanf("%s",a.bloodGroup);
-    gotoxy(21,9);
-    printf("Number Of Blood Donation:");gotoxy(46,9);
+    gotoxy(22,9);
+    printf("Number Of Blood Donation:");gotoxy(47,9);
     scanf("%d",&a.numberOfBloodD);
   /*  gotoxy(21,10);
     printf("Last Date of Blood Donation:");gotoxy(50,10);
@@ -228,10 +226,10 @@ int getdata()
     printf("/");
     gotoxy(54,10);
     scanf("%d ",&a.yy);*/
-    gotoxy(21,11);
-    printf("Enter Phone number:");gotoxy(40,11);
+    gotoxy(22,11);
+    printf("Enter Phone number:");gotoxy(41,11);
     scanf("%lld",&a.phNumber);
-    gotoxy(21,12);
+    gotoxy(22,12);
     printf("Enter your email:");gotoxy(39,12);
     scanf("%s",&a.email);
     return 1;
