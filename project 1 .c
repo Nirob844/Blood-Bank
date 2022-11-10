@@ -8,6 +8,7 @@ void mainmenu(void);
 void addNewDonors(void);
 void viewListOfDonor(void);
 void searchDonor(void);
+void deleteDonors(void);
 void gotoxy (int x, int y);
 
 
@@ -19,9 +20,10 @@ void gotoxy (int x, int y)
 }
 
 char password[10]={"nirob"};
+char findbook;
 
 
-FILE *fp;
+FILE *fp,*ft;
 int s;
 
 struct donorsList
@@ -30,7 +32,9 @@ struct donorsList
     char name[20];
     char bloodGroup[20];
     int numberOfBloodD;
-    int dd,mm,yy;
+    int dd;
+    int mm;
+    int yy;
     long long int phNumber;
     char email[30];
     char *cat;
@@ -60,7 +64,9 @@ void mainmenu()
     gotoxy(20,9);
     printf("\xDB\xDB\xDB\xDB\xB2 3. Search Donors");
     gotoxy(20,11);
-    printf("\xDB\xDB\xDB\xDB\xB2 4. Close Application");
+    printf("\xDB\xDB\xDB\xDB\xB2 4. Delete Donors");
+    gotoxy(20,13);
+    printf("\xDB\xDB\xDB\xDB\xB2 5. Close Application");
      gotoxy(20,19);
     printf("------------------------------------------");
     gotoxy(20,21);
@@ -80,6 +86,10 @@ void mainmenu()
         searchDonor();
         break;
         case '4':
+       deleteDonors();
+        break;
+
+        case '5':
         {
         system("cls");
         gotoxy(16,3);
@@ -215,16 +225,15 @@ int getdata()
     gotoxy(22,9);
     printf("Number Of Blood Donation:");gotoxy(47,9);
     scanf("%d",&a.numberOfBloodD);
-  /*  gotoxy(21,10);
+   /* gotoxy(22,10);
     printf("Last Date of Blood Donation:");gotoxy(50,10);
     scanf("%d ",&a.dd);
+    gotoxy(22,10);
     gotoxy(51,10);
-    printf("/");
-    gotoxy(52,10);
-    scanf("%d ",&a.mm);
+     printf("/");gotoxy(52,10);
+   scanf("%d ",&a.mm);
     gotoxy(53,10);
-    printf("/");
-    gotoxy(54,10);
+    printf("/");gotoxy(54,10);
     scanf("%d ",&a.yy);*/
     gotoxy(22,11);
     printf("Enter Phone number:");gotoxy(41,11);
@@ -296,4 +305,74 @@ void returnfunc(void)
     mainmenu();
     else
     goto a;
+}
+void deleteDonors(void)    //funtion that add books
+{
+    system("cls");
+    int d;
+    char another='y';
+    while(another=='y')  //infinite loop
+    {
+    system("cls");
+    gotoxy(10,5);
+    printf("Enter the Donar ID to  delete:");
+    scanf("%d",&d);
+    fp=fopen("Bibek.dat","rb+");
+    rewind(fp);
+    while(fread(&a,sizeof(a),1,fp)==1)
+    {
+        if(a.id==d)
+        {
+
+        gotoxy(10,7);
+        printf("The Donor record is available");
+        gotoxy(10,8);
+        printf("Donor name is %s",a.name);
+        findbook='t';
+        }
+    }
+    if(findbook!='t')
+    {
+        gotoxy(10,10);
+        printf("No record is found modify the search");
+        if(getch())
+        mainmenu();
+    }
+    if(findbook=='t' )
+    {
+        gotoxy(10,9);
+        printf("Do you want to delete it?(Y/N):");
+        if(getch()=='y')
+        {
+        ft=fopen("test.dat","wb+");  //temporary file for delete
+        rewind(fp);
+        while(fread(&a,sizeof(a),1,fp)==1)
+        {
+            if(a.id!=d)
+            {
+            fseek(ft,0,SEEK_CUR);
+            fwrite(&a,sizeof(a),1,ft); //write all in tempory file except that
+            }                              //we want to delete
+        }
+        fclose(ft);
+        fclose(fp);
+        remove("Bibek.dat");
+        rename("test.dat","Bibek.dat"); //copy all item from temporary file to fp except that
+        fp=fopen("Bibek.dat","rb+");    //we want to delete
+        if(findbook=='t')
+        {
+            gotoxy(10,10);
+            printf("The record is sucessfully deleted");
+            gotoxy(10,11);
+            printf("Delete another record?(Y/N)");
+        }
+        }
+    else
+    mainmenu();
+    fflush(stdin);
+    another=getch();
+    }
+    }
+    gotoxy(10,15);
+    mainmenu();
 }
