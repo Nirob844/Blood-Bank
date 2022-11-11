@@ -32,9 +32,9 @@ struct donorsList
     char name[20];
     char bloodGroup[20];
     int numberOfBloodD;
-    int dd;
+    /*int dd;
     int mm;
-    int yy;
+    int yy;*/
     long long int phNumber;
     char email[30];
     char *cat;
@@ -72,7 +72,6 @@ void mainmenu()
     gotoxy(20,21);
     printf("Enter your choice:");
         gotoxy(38,21);
- //scanf("%d",&s);
 
     switch(getch())
     {
@@ -243,23 +242,23 @@ int getdata()
     scanf("%s",&a.email);
     return 1;
 }
-int checkid(int t)  //check whether the book is exist in library or not
+int checkid(int t)  //check whether the donor is exist in list or not
 {
     rewind(fp);
     while(fread(&a,sizeof(a),1,fp)==1)
     if(a.id==t)
-    return 0;  //returns 0 if book exits
+    return 0;  //returns 0 if donor exits
     return 1; //return 1 if it not
 }
 
-void searchDonor(void)    //funtion that add books
+void searchDonor(void)    //funtion that search donor
 {
     system("cls");
     printf("This is search donors");
     getch();
     mainmenu() ;
 }
-void viewListOfDonor(void)    //funtion that add books
+void viewListOfDonor(void)    //funtion that view donor
 {
    int i=0,j;
     system("cls");
@@ -272,7 +271,6 @@ void viewListOfDonor(void)    //funtion that add books
     while(fread(&a,sizeof(a),1,fp)==1)
     {
     gotoxy(3,j);
-    //printf("%s",a.cat);
     gotoxy(8,j);
     printf("%d",a.id);
     gotoxy(15,j);
@@ -287,10 +285,7 @@ void viewListOfDonor(void)    //funtion that add books
     printf("%s",a.email);
     printf("\n\n");
     j++;
-    //i=i+a.numberOfBloodD;
       }
-    /*  gotoxy(3,25);
-      printf("Total list =%d",i);*/
       fclose(fp);
       gotoxy(35,25);
       returnfunc();
@@ -306,7 +301,7 @@ void returnfunc(void)
     else
     goto a;
 }
-void deleteDonors(void)    //funtion that add books
+void deleteDonors(void)    //funtion that delete donor
 {
     system("cls");
     int d;
