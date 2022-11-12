@@ -251,13 +251,6 @@ int checkid(int t)  //check whether the donor is exist in list or not
     return 1; //return 1 if it not
 }
 
-void searchDonor(void)    //funtion that search donor
-{
-    system("cls");
-    printf("This is search donors");
-    getch();
-    mainmenu() ;
-}
 void viewListOfDonor(void)    //funtion that view donor
 {
    int i=0,j;
@@ -300,6 +293,152 @@ void returnfunc(void)
     mainmenu();
     else
     goto a;
+}
+void searchDonor(void)    //funtion that add donors
+{
+    system("cls");
+    int d;
+    printf("*****************************Search donors*********************************");
+    gotoxy(20,10);
+    printf("\xDB\xDB\xDB\xB2 1. Search By ID");
+    gotoxy(20,14);
+    printf("\xDB\xDB\xDB\xB2 2. Search By Name");
+    gotoxy( 15,20);
+    printf("Enter Your Choice");
+    fp=fopen("Bibek.dat","rb+"); //open file for reading propose
+    rewind(fp);   //move pointer at the begining of file
+    switch(getch())
+    {
+      case '1':
+    {
+        system("cls");
+        gotoxy(25,4);
+        printf("****Search Donors By Id****");
+        gotoxy(20,5);
+        printf("Enter the Donar id:");
+        scanf("%d",&d);
+        gotoxy(20,7);
+        printf("Searching........");
+        while(fread(&a,sizeof(a),1,fp)==1)
+        {
+        if(a.id==d)
+        {
+            gotoxy(20,7);
+            printf("The Donar is available");
+            gotoxy(20,8);
+            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+            gotoxy(20,9);
+            printf("\xB2 ID:%d",a.id);gotoxy(57,9);printf("\xB2");
+            gotoxy(20,10);
+            printf("\xB2 Name:%s",a.name);gotoxy(57,10);printf("\xB2");
+            gotoxy(20,11);
+            printf("\xB2 Blood Group:%s ",a.bloodGroup);gotoxy(57,11);printf("\xB2");
+            gotoxy(20,12);
+            printf("\xB2 Number Of Blood Donation:%d ",a.numberOfBloodD);gotoxy(57,12);printf("\xB2"); gotoxy(57,11);printf("\xB2");
+            gotoxy(20,13);
+            printf("\xB2 Phone Number:%.lld ",a.phNumber);gotoxy(57,13);printf("\xB2");
+            gotoxy(20,14);
+            printf("\xB2 Email::%s ",a.email);gotoxy(57,14);printf("\xB2");
+            gotoxy(20,15);
+            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+            findbook='t';
+        }
+
+        }
+        if(findbook!='t')  //checks whether conditiion enters inside loop or not
+        {
+        gotoxy(20,8);
+        printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+        gotoxy(20,9);printf("\xB2");  gotoxy(38,9);printf("\xB2");
+        gotoxy(20,10);
+        printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+        gotoxy(22,9);printf("\aNo Record Found");
+        }
+        gotoxy(20,17);
+        printf("Try another search?(Y/N)");
+        if(getch()=='y')
+        searchDonor
+    ();
+        else
+        mainmenu();
+        break;
+    }
+    case '2':
+    {
+        char s[15];
+        system("cls");
+        gotoxy(25,4);
+        printf("****Search donors By Name****");
+        gotoxy(20,5);
+        printf("Enter Book Name:");
+        scanf("%s",s);
+        int d=0;
+        while(fread(&a,sizeof(a),1,fp)==1)
+        {
+        if(strcmp(a.name,(s))==0) //checks whether a.name is equal to s or not
+        {
+            gotoxy(20,7);
+            printf("The Book is available");
+            gotoxy(20,8);
+            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+            // gotoxy(20,9);
+            // printf("\xB2 ID:%d",a.id);gotoxy(57,9);printf("\xB2");
+            // gotoxy(20,10);
+            // printf("\xB2 Name:%s",a.name);gotoxy(57,10);printf("\xB2");
+            // gotoxy(20,11);
+            // printf("\xB2 Author:%s",a.Author);gotoxy(57,11);printf("\xB2");
+            // gotoxy(20,12);
+            // printf("\xB2 Qantity:%d",a.quantity);gotoxy(57,12);printf("\xB2");
+            // gotoxy(20,13);
+            // printf("\xB2 Price:Rs.%.2f",a.Price);gotoxy(57,13);printf("\xB2");
+            // gotoxy(20,14);
+            // printf("\xB2 Rack No:%d ",a.rackno);gotoxy(57,14);printf("\xB2");
+            gotoxy(20,9);
+            printf("\xB2 ID:%d",a.id);gotoxy(57,9);printf("\xB2");
+            gotoxy(20,10);
+            printf("\xB2 Name:%s",a.name);gotoxy(57,10);printf("\xB2");
+            gotoxy(20,11);
+            printf("\xB2 Blood Group:%s ",a.bloodGroup);gotoxy(57,11);printf("\xB2");
+            gotoxy(20,12);
+            printf("\xB2 Number Of Blood Donation:%d ",a.numberOfBloodD);gotoxy(57,12);printf("\xB2"); gotoxy(57,11);printf("\xB2");
+            gotoxy(20,13);
+            printf("\xB2 Phone Number:%.lld",a.phNumber);gotoxy(57,13);printf("\xB2");
+            gotoxy(20,14);
+            printf("\xB2 Email::%s ",a.email);gotoxy(57,14);printf("\xB2");
+            gotoxy(20,15);
+            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+            d++;
+        }
+
+        }
+        if(d==0)
+        {
+        gotoxy(20,8);
+        printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+        gotoxy(20,9);printf("\xB2");  gotoxy(38,9);printf("\xB2");
+        gotoxy(20,10);
+        printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+        gotoxy(22,9);printf("\aNo Record Found");
+        }
+        gotoxy(20,17);
+        printf("Try another search?(Y/N)");
+        if(getch()=='y')
+        searchDonor
+    ();
+        else
+        mainmenu();
+        break;
+    }
+    default :
+    getch();
+    searchDonor
+();
+    }
+    fclose(fp);
 }
 void deleteDonors(void)    //funtion that delete donor
 {
