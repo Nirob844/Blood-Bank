@@ -32,6 +32,7 @@ struct donorsList
     char name[20];
     char bloodGroup[20];
     int numberOfBloodD;
+    char date[20];
     /*int dd;
     int mm;
     int yy;*/
@@ -56,7 +57,7 @@ void mainmenu()
     int i;
     gotoxy(20,3);
     printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 MAIN MENU");
-    printf(" \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+   printf(" \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     gotoxy(20,5);
     printf("\xDB\xDB\xDB\xDB\xB2 1. Add New Donors ");
     gotoxy(20,7);
@@ -224,16 +225,9 @@ int getdata()
     gotoxy(22,9);
     printf("Number Of Blood Donation:");gotoxy(47,9);
     scanf("%d",&a.numberOfBloodD);
-   /* gotoxy(22,10);
-    printf("Last Date of Blood Donation:");gotoxy(50,10);
-    scanf("%d ",&a.dd);
     gotoxy(22,10);
-    gotoxy(51,10);
-     printf("/");gotoxy(52,10);
-   scanf("%d ",&a.mm);
-    gotoxy(53,10);
-    printf("/");gotoxy(54,10);
-    scanf("%d ",&a.yy);*/
+    printf("Last Date of Blood Donation:");gotoxy(50,10);
+     scanf("%s",a.date);
     gotoxy(22,11);
     printf("Enter Phone number:");gotoxy(41,11);
     scanf("%lld",&a.phNumber);
@@ -258,7 +252,7 @@ void viewListOfDonor(void)    //funtion that view donor
     gotoxy(1,1);
     printf("*********************************Donor List*****************************");
     gotoxy(2,2);
-    printf("     ID    DONAR NAME     BLOOD GROUP       N.OF DONATION     PH.NUMBER      EMAIL ");
+    printf("     ID    DONAR NAME  BLOOD GROUP  N.OF DONATION  Last Date  PH.NUMBER    EMAIL ");
     j=4;
     fp=fopen("Bibek.dat","rb");
     while(fread(&a,sizeof(a),1,fp)==1)
@@ -268,13 +262,15 @@ void viewListOfDonor(void)    //funtion that view donor
     printf("%d",a.id);
     gotoxy(15,j);
     printf("%s",a.name);
-    gotoxy(31,j);
+    gotoxy(27,j);
     printf("%s",a.bloodGroup);
-    gotoxy(52,j);
+    gotoxy(42,j);
     printf("%d",a.numberOfBloodD);
+gotoxy(54,j);
+ printf("%s",a.date);
     gotoxy(64,j);
     printf("%lld",a.phNumber);
-    gotoxy(76,j);
+    gotoxy(77,j);
     printf("%s",a.email);
     printf("\n\n");
     j++;
@@ -337,10 +333,12 @@ void searchDonor(void)    //funtion that add donors
             gotoxy(20,12);
             printf("\xB2 Number Of Blood Donation:%d ",a.numberOfBloodD);gotoxy(57,12);printf("\xB2"); gotoxy(57,11);printf("\xB2");
             gotoxy(20,13);
-            printf("\xB2 Phone Number:%.lld ",a.phNumber);gotoxy(57,13);printf("\xB2");
-            gotoxy(20,14);
-            printf("\xB2 Email::%s ",a.email);gotoxy(57,14);printf("\xB2");
+            printf("\xB2 Last Date Donation:%s ",a.date);gotoxy(57,13);printf("\xB2");
+             gotoxy(20,14);
+            printf("\xB2 Phone Number:%.lld ",a.phNumber);gotoxy(57,14);printf("\xB2");
             gotoxy(20,15);
+            printf("\xB2 Email::%s ",a.email);gotoxy(57,15);printf("\xB2");
+            gotoxy(20,16);
             printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
             printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
             findbook='t';
@@ -384,18 +382,6 @@ void searchDonor(void)    //funtion that add donors
             gotoxy(20,8);
             printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
             printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-            // gotoxy(20,9);
-            // printf("\xB2 ID:%d",a.id);gotoxy(57,9);printf("\xB2");
-            // gotoxy(20,10);
-            // printf("\xB2 Name:%s",a.name);gotoxy(57,10);printf("\xB2");
-            // gotoxy(20,11);
-            // printf("\xB2 Author:%s",a.Author);gotoxy(57,11);printf("\xB2");
-            // gotoxy(20,12);
-            // printf("\xB2 Qantity:%d",a.quantity);gotoxy(57,12);printf("\xB2");
-            // gotoxy(20,13);
-            // printf("\xB2 Price:Rs.%.2f",a.Price);gotoxy(57,13);printf("\xB2");
-            // gotoxy(20,14);
-            // printf("\xB2 Rack No:%d ",a.rackno);gotoxy(57,14);printf("\xB2");
             gotoxy(20,9);
             printf("\xB2 ID:%d",a.id);gotoxy(57,9);printf("\xB2");
             gotoxy(20,10);
@@ -405,10 +391,12 @@ void searchDonor(void)    //funtion that add donors
             gotoxy(20,12);
             printf("\xB2 Number Of Blood Donation:%d ",a.numberOfBloodD);gotoxy(57,12);printf("\xB2"); gotoxy(57,11);printf("\xB2");
             gotoxy(20,13);
-            printf("\xB2 Phone Number:%.lld",a.phNumber);gotoxy(57,13);printf("\xB2");
-            gotoxy(20,14);
-            printf("\xB2 Email::%s ",a.email);gotoxy(57,14);printf("\xB2");
+            printf("\xB2 Last Date Donation:%s ",a.date);gotoxy(57,13);printf("\xB2");
+             gotoxy(20,14);
+            printf("\xB2 Phone Number:%.lld ",a.phNumber);gotoxy(57,14);printf("\xB2");
             gotoxy(20,15);
+            printf("\xB2 Email::%s ",a.email);gotoxy(57,15);printf("\xB2");
+            gotoxy(20,16);
             printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
             printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
             d++;
