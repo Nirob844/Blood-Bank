@@ -8,6 +8,7 @@ void mainmenu(void);
 void addNewDonors(void);
 void viewListOfDonor(void);
 void searchDonor(void);
+void editDonar(void) ;
 void deleteDonors(void);
 void gotoxy (int x, int y);
 
@@ -15,11 +16,12 @@ void gotoxy (int x, int y);
 COORD coord = {0, 0}; // sets coordinates to 0,0
 void gotoxy (int x, int y)
 {
-        coord.X = x; coord.Y = y; // X and Y coordinates
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+    coord.X = x;
+    coord.Y = y; // X and Y coordinates
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
-char password[10]={"nirob"};
+char password[10]= {"nirob"};
 char findbook;
 
 
@@ -46,9 +48,9 @@ struct donorsList a;
 int main()
 
 {
-      Password();
-      getch();
-   return 0;
+    Password();
+    getch();
+    return 0;
 }
 void mainmenu()
 {
@@ -57,7 +59,7 @@ void mainmenu()
     int i;
     gotoxy(20,3);
     printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 MAIN MENU");
-   printf(" \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+    printf(" \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     gotoxy(20,5);
     printf("\xDB\xDB\xDB\xDB\xB2 1. Add New Donors ");
     gotoxy(20,7);
@@ -65,45 +67,49 @@ void mainmenu()
     gotoxy(20,9);
     printf("\xDB\xDB\xDB\xDB\xB2 3. Search Donors");
     gotoxy(20,11);
-    printf("\xDB\xDB\xDB\xDB\xB2 4. Delete Donors");
+    printf("\xDB\xDB\xDB\xDB\xB2 4. Edit Donar");
     gotoxy(20,13);
-    printf("\xDB\xDB\xDB\xDB\xB2 5. Close Application");
-     gotoxy(20,19);
+    printf("\xDB\xDB\xDB\xDB\xB2 5. Delete Donar");
+    gotoxy(20,15);
+    printf("\xDB\xDB\xDB\xDB\xB2 6. Close Application");
+    gotoxy(20,19);
     printf("------------------------------------------");
     gotoxy(20,21);
     printf("Enter your choice:");
-        gotoxy(38,21);
+    gotoxy(38,21);
 
     switch(getch())
     {
-        case '1':
+    case '1':
         addNewDonors();
         break;
     case '2':
         viewListOfDonor();
         break;
-        case '3':
+    case '3':
         searchDonor();
         break;
-        case '4':
-       deleteDonors();
+    case '4':
+        editDonar();
         break;
-
-        case '5':
-        {
+    case '5':
+        deleteDonors();
+        break;
+    case '6':
+    {
         system("cls");
         gotoxy(16,3);
         printf("Thanks for using the Program..");
         gotoxy(10,7);
         exit(0);
-        }
-        default:
-        {
+    }
+    default:
+    {
         gotoxy(10,23);
         printf("\aWrong Entry!!Please re-entered correct option");
         if(getch())
-        mainmenu();
-        }
+            mainmenu();
+    }
     }
 
 }
@@ -111,41 +117,42 @@ void mainmenu()
 void Password(void) //for password option
 {
 
-   system("cls");
-   char ch,pass[10];
-   int i=0;
-   gotoxy(10,4);
-   printf("******************** Password Protected ********************");
-   gotoxy(15,7);
-   printf("Enter Password:");
+    system("cls");
+    char ch,pass[10];
+    int i=0;
+    gotoxy(10,4);
+    printf("******************** Password Protected ********************");
+    gotoxy(15,7);
+    printf("Enter Password:");
 
-   while(ch!=13)
-   {
-	ch=getch();
-	if(ch!=13 && ch!=8){
-	putch('*');
-	pass[i] = ch;
-	i++;
-	}
-   }
-   pass[i] = '\0';
-   if(strcmp(pass,password)==0)
-   {
+    while(ch!=13)
+    {
+        ch=getch();
+        if(ch!=13 && ch!=8)
+        {
+            putch('*');
+            pass[i] = ch;
+            i++;
+        }
+    }
+    pass[i] = '\0';
+    if(strcmp(pass,password)==0)
+    {
 
-	gotoxy(15,9);
-	printf("Password match");
-	gotoxy(17,10);
-	printf("Press any key to countinue.....");
-	getch();
-	mainmenu();
-   }
-   else
-   {
-	 gotoxy(15,16);
-	 printf("\aWarning!! Incorrect Password");
-	 getch();
-	 Password();
-   }
+        gotoxy(15,9);
+        printf("Password match");
+        gotoxy(17,10);
+        printf("Press any key to countinue.....");
+        getch();
+        mainmenu();
+    }
+    else
+    {
+        gotoxy(15,16);
+        printf("\aWarning!! Incorrect Password");
+        getch();
+        Password();
+    }
 }
 void addNewDonors(void)    //funtion that add donors
 {
@@ -155,17 +162,17 @@ void addNewDonors(void)    //funtion that add donors
     fp=fopen("Bibek.dat","ab+");
     if(getdata()==1)
     {
-    fseek(fp,0,SEEK_END);
-    fwrite(&a,sizeof(a),1,fp);
-    fclose(fp);
-    gotoxy(21,14);
-    printf("The record is sucessfully saved");
-    gotoxy(21,15);
-    printf("Save any more?(Y / N):");
-    if(getch()=='n')
-        mainmenu();
-    else
-        system("cls");
+        fseek(fp,0,SEEK_END);
+        fwrite(&a,sizeof(a),1,fp);
+        fclose(fp);
+        gotoxy(21,14);
+        printf("The record is sucessfully saved");
+        gotoxy(21,15);
+        printf("Save any more?(Y / N):");
+        if(getch()=='n')
+            mainmenu();
+        else
+            system("cls");
         addNewDonors();
     }
 }
@@ -178,27 +185,47 @@ int getdata()
     printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     gotoxy(20,5);
-    printf("\xB2");gotoxy(66,5);printf("\xB2");
+    printf("\xB2");
+    gotoxy(66,5);
+    printf("\xB2");
     gotoxy(20,6);
-    printf("\xB2");gotoxy(66,6);printf("\xB2");
+    printf("\xB2");
+    gotoxy(66,6);
+    printf("\xB2");
     gotoxy(20,7);
-    printf("\xB2");gotoxy(66,7);printf("\xB2");
+    printf("\xB2");
+    gotoxy(66,7);
+    printf("\xB2");
     gotoxy(20,8);
-    printf("\xB2");gotoxy(66,8);printf("\xB2");
+    printf("\xB2");
+    gotoxy(66,8);
+    printf("\xB2");
     gotoxy(20,9);
-    printf("\xB2");gotoxy(66,9);printf("\xB2");
+    printf("\xB2");
+    gotoxy(66,9);
+    printf("\xB2");
     gotoxy(20,10);
-    printf("\xB2");gotoxy(66,10);printf("\xB2");
+    printf("\xB2");
+    gotoxy(66,10);
+    printf("\xB2");
     gotoxy(20,11);
-    printf("\xB2");gotoxy(66,11);printf("\xB2");
+    printf("\xB2");
+    gotoxy(66,11);
+    printf("\xB2");
     gotoxy(20,12);
-    printf("\xB2");gotoxy(66,12);printf("\xB2");
+    printf("\xB2");
+    gotoxy(66,12);
+    printf("\xB2");
     gotoxy(20,13);
-    printf("\xB2");gotoxy(66,13);printf("\xB2");
+    printf("\xB2");
+    gotoxy(66,13);
+    printf("\xB2");
     gotoxy(20,14);
-    printf("\xB2");gotoxy(66,14);printf("\xB2");
+    printf("\xB2");
+    gotoxy(66,14);
+    printf("\xB2");
     gotoxy(20,15);
-   printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     gotoxy(26,5);
     printf("Information of donors:");
@@ -217,22 +244,28 @@ int getdata()
     }
     a.id=t;
     gotoxy(22,7);
-    printf("Donor Name:");gotoxy(33,7);
+    printf("Donor Name:");
+    gotoxy(33,7);
     scanf("%s",a.name);
     gotoxy(22,8);
-    printf("Blood Group:");gotoxy(34,8);
+    printf("Blood Group:");
+    gotoxy(34,8);
     scanf("%s",a.bloodGroup);
     gotoxy(22,9);
-    printf("Number Of Blood Donation:");gotoxy(47,9);
+    printf("Number Of Blood Donation:");
+    gotoxy(47,9);
     scanf("%d",&a.numberOfBloodD);
     gotoxy(22,10);
-    printf("Last Date of Blood Donation:");gotoxy(50,10);
-     scanf("%s",a.date);
+    printf("Last Date of Blood Donation:");
+    gotoxy(50,10);
+    scanf("%s",a.date);
     gotoxy(22,11);
-    printf("Enter Phone number:");gotoxy(41,11);
+    printf("Enter Phone number:");
+    gotoxy(41,11);
     scanf("%lld",&a.phNumber);
     gotoxy(22,12);
-    printf("Enter your email:");gotoxy(39,12);
+    printf("Enter your email:");
+    gotoxy(39,12);
     scanf("%s",&a.email);
     return 1;
 }
@@ -240,14 +273,14 @@ int checkid(int t)  //check whether the donor is exist in list or not
 {
     rewind(fp);
     while(fread(&a,sizeof(a),1,fp)==1)
-    if(a.id==t)
-    return 0;  //returns 0 if donor exits
+        if(a.id==t)
+            return 0;  //returns 0 if donor exits
     return 1; //return 1 if it not
 }
 
 void viewListOfDonor(void)    //funtion that view donor
 {
-   int i=0,j;
+    int i=0,j;
     system("cls");
     gotoxy(1,1);
     printf("*********************************Donor List*****************************");
@@ -257,38 +290,38 @@ void viewListOfDonor(void)    //funtion that view donor
     fp=fopen("Bibek.dat","rb");
     while(fread(&a,sizeof(a),1,fp)==1)
     {
-    gotoxy(3,j);
-    gotoxy(8,j);
-    printf("%d",a.id);
-    gotoxy(15,j);
-    printf("%s",a.name);
-    gotoxy(27,j);
-    printf("%s",a.bloodGroup);
-    gotoxy(42,j);
-    printf("%d",a.numberOfBloodD);
-gotoxy(54,j);
- printf("%s",a.date);
-    gotoxy(64,j);
-    printf("%lld",a.phNumber);
-    gotoxy(77,j);
-    printf("%s",a.email);
-    printf("\n\n");
-    j++;
-      }
-      fclose(fp);
-      gotoxy(35,25);
-      returnfunc();
+        gotoxy(3,j);
+        gotoxy(8,j);
+        printf("%d",a.id);
+        gotoxy(15,j);
+        printf("%s",a.name);
+        gotoxy(27,j);
+        printf("%s",a.bloodGroup);
+        gotoxy(42,j);
+        printf("%d",a.numberOfBloodD);
+        gotoxy(54,j);
+        printf("%s",a.date);
+        gotoxy(64,j);
+        printf("%lld",a.phNumber);
+        gotoxy(77,j);
+        printf("%s",a.email);
+        printf("\n\n");
+        j++;
+    }
+    fclose(fp);
+    gotoxy(35,25);
+    returnfunc();
 }
 void returnfunc(void)
 {
     {
-    printf(" Press ENTER to return to main menu");
+        printf(" Press ENTER to return to main menu");
     }
-    a:
+a:
     if(getch()==13) //allow only use of enter
-    mainmenu();
+        mainmenu();
     else
-    goto a;
+        goto a;
 }
 void searchDonor(void)    //funtion that add donors
 {
@@ -305,7 +338,7 @@ void searchDonor(void)    //funtion that add donors
     rewind(fp);   //move pointer at the begining of file
     switch(getch())
     {
-      case '1':
+    case '1':
     {
         system("cls");
         gotoxy(25,4);
@@ -317,50 +350,70 @@ void searchDonor(void)    //funtion that add donors
         printf("Searching........");
         while(fread(&a,sizeof(a),1,fp)==1)
         {
-        if(a.id==d)
-        {
-            gotoxy(20,7);
-            printf("The Donar is available");
-            gotoxy(20,8);
-            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-            gotoxy(20,9);
-            printf("\xB2 ID:%d",a.id);gotoxy(57,9);printf("\xB2");
-            gotoxy(20,10);
-            printf("\xB2 Name:%s",a.name);gotoxy(57,10);printf("\xB2");
-            gotoxy(20,11);
-            printf("\xB2 Blood Group:%s ",a.bloodGroup);gotoxy(57,11);printf("\xB2");
-            gotoxy(20,12);
-            printf("\xB2 Number Of Blood Donation:%d ",a.numberOfBloodD);gotoxy(57,12);printf("\xB2"); gotoxy(57,11);printf("\xB2");
-            gotoxy(20,13);
-            printf("\xB2 Last Date Donation:%s ",a.date);gotoxy(57,13);printf("\xB2");
-             gotoxy(20,14);
-            printf("\xB2 Phone Number:%.lld ",a.phNumber);gotoxy(57,14);printf("\xB2");
-            gotoxy(20,15);
-            printf("\xB2 Email::%s ",a.email);gotoxy(57,15);printf("\xB2");
-            gotoxy(20,16);
-            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-            findbook='t';
-        }
+            if(a.id==d)
+            {
+                gotoxy(20,7);
+                printf("The Donar is available");
+                gotoxy(20,8);
+                printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+                printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+                gotoxy(20,9);
+                printf("\xB2 ID:%d",a.id);
+                gotoxy(57,9);
+                printf("\xB2");
+                gotoxy(20,10);
+                printf("\xB2 Name:%s",a.name);
+                gotoxy(57,10);
+                printf("\xB2");
+                gotoxy(20,11);
+                printf("\xB2 Blood Group:%s ",a.bloodGroup);
+                gotoxy(57,11);
+                printf("\xB2");
+                gotoxy(20,12);
+                printf("\xB2 Number Of Blood Donation:%d ",a.numberOfBloodD);
+                gotoxy(57,12);
+                printf("\xB2");
+                gotoxy(57,11);
+                printf("\xB2");
+                gotoxy(20,13);
+                printf("\xB2 Last Date Donation:%s ",a.date);
+                gotoxy(57,13);
+                printf("\xB2");
+                gotoxy(20,14);
+                printf("\xB2 Phone Number:%.lld ",a.phNumber);
+                gotoxy(57,14);
+                printf("\xB2");
+                gotoxy(20,15);
+                printf("\xB2 Email::%s ",a.email);
+                gotoxy(57,15);
+                printf("\xB2");
+                gotoxy(20,16);
+                printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+                printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+                findbook='t';
+            }
 
         }
         if(findbook!='t')  //checks whether conditiion enters inside loop or not
         {
-        gotoxy(20,8);
-        printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-        gotoxy(20,9);printf("\xB2");  gotoxy(38,9);printf("\xB2");
-        gotoxy(20,10);
-        printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-        gotoxy(22,9);printf("\aNo Record Found");
+            gotoxy(20,8);
+            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+            gotoxy(20,9);
+            printf("\xB2");
+            gotoxy(38,9);
+            printf("\xB2");
+            gotoxy(20,10);
+            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+            gotoxy(22,9);
+            printf("\aNo Record Found");
         }
         gotoxy(20,17);
         printf("Try another search?(Y/N)");
         if(getch()=='y')
-        searchDonor
-    ();
+            searchDonor
+            ();
         else
-        mainmenu();
+            mainmenu();
         break;
     }
     case '2':
@@ -375,58 +428,141 @@ void searchDonor(void)    //funtion that add donors
         int d=0;
         while(fread(&a,sizeof(a),1,fp)==1)
         {
-        if(strcmp(a.name,(s))==0) //checks whether a.name is equal to s or not
-        {
-            gotoxy(20,7);
-            printf("The Book is available");
-            gotoxy(20,8);
-            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-            gotoxy(20,9);
-            printf("\xB2 ID:%d",a.id);gotoxy(57,9);printf("\xB2");
-            gotoxy(20,10);
-            printf("\xB2 Name:%s",a.name);gotoxy(57,10);printf("\xB2");
-            gotoxy(20,11);
-            printf("\xB2 Blood Group:%s ",a.bloodGroup);gotoxy(57,11);printf("\xB2");
-            gotoxy(20,12);
-            printf("\xB2 Number Of Blood Donation:%d ",a.numberOfBloodD);gotoxy(57,12);printf("\xB2"); gotoxy(57,11);printf("\xB2");
-            gotoxy(20,13);
-            printf("\xB2 Last Date Donation:%s ",a.date);gotoxy(57,13);printf("\xB2");
-             gotoxy(20,14);
-            printf("\xB2 Phone Number:%.lld ",a.phNumber);gotoxy(57,14);printf("\xB2");
-            gotoxy(20,15);
-            printf("\xB2 Email::%s ",a.email);gotoxy(57,15);printf("\xB2");
-            gotoxy(20,16);
-            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-            d++;
-        }
+            if(strcmp(a.name,(s))==0) //checks whether a.name is equal to s or not
+            {
+                gotoxy(20,7);
+                printf("The Book is available");
+                gotoxy(20,8);
+                printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+                printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+                gotoxy(20,9);
+                printf("\xB2 ID:%d",a.id);
+                gotoxy(57,9);
+                printf("\xB2");
+                gotoxy(20,10);
+                printf("\xB2 Name:%s",a.name);
+                gotoxy(57,10);
+                printf("\xB2");
+                gotoxy(20,11);
+                printf("\xB2 Blood Group:%s ",a.bloodGroup);
+                gotoxy(57,11);
+                printf("\xB2");
+                gotoxy(20,12);
+                printf("\xB2 Number Of Blood Donation:%d ",a.numberOfBloodD);
+                gotoxy(57,12);
+                printf("\xB2");
+                gotoxy(57,11);
+                printf("\xB2");
+                gotoxy(20,13);
+                printf("\xB2 Last Date Donation:%s ",a.date);
+                gotoxy(57,13);
+                printf("\xB2");
+                gotoxy(20,14);
+                printf("\xB2 Phone Number:%.lld ",a.phNumber);
+                gotoxy(57,14);
+                printf("\xB2");
+                gotoxy(20,15);
+                printf("\xB2 Email::%s ",a.email);
+                gotoxy(57,15);
+                printf("\xB2");
+                gotoxy(20,16);
+                printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+                printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+                d++;
+            }
 
         }
         if(d==0)
         {
-        gotoxy(20,8);
-        printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-        gotoxy(20,9);printf("\xB2");  gotoxy(38,9);printf("\xB2");
-        gotoxy(20,10);
-        printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-        gotoxy(22,9);printf("\aNo Record Found");
+            gotoxy(20,8);
+            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+            gotoxy(20,9);
+            printf("\xB2");
+            gotoxy(38,9);
+            printf("\xB2");
+            gotoxy(20,10);
+            printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+            gotoxy(22,9);
+            printf("\aNo Record Found");
         }
         gotoxy(20,17);
         printf("Try another search?(Y/N)");
         if(getch()=='y')
-        searchDonor
-    ();
+            searchDonor
+            ();
         else
-        mainmenu();
+            mainmenu();
         break;
     }
     default :
-    getch();
-    searchDonor
-();
+        getch();
+        searchDonor
+        ();
     }
     fclose(fp);
+}
+void editDonar(void)    //funtion that add Donars
+{
+
+    system("cls");
+    int c=0;
+    int d,e;
+    gotoxy(20,4);
+    printf("****Edit Donors Section****");
+    char another='y';
+    while(another=='y')
+    {
+        system("cls");
+        gotoxy(15,6);
+        printf("Enter Donar Id to be edited:");
+        scanf("%d",&d);
+        fp=fopen("Bibek.dat","rb+");
+        while(fread(&a,sizeof(a),1,fp)==1)
+        {
+            if(checkid(d)==0)
+            {
+                gotoxy(15,7);
+                printf("The donar is availble");
+                gotoxy(15,8);
+                printf("The Donar ID:%d",a.id);
+                gotoxy(15,9);
+                printf("Enter new name:");
+                scanf("%s",a.name);
+                gotoxy(15,10);
+                printf("Enter new blood group:");
+                scanf("%s",a.bloodGroup);
+                gotoxy(15,11);
+                printf("Enter new n.of blood donation:");
+                scanf("%d",&a.numberOfBloodD);
+                gotoxy(15,12);
+                printf("Enter last date of blood donation:");
+                scanf("%s",&a.date);
+                gotoxy(15,13);
+                printf("Enter new phone number:");
+                scanf("%lld",&a.phNumber);
+                gotoxy(15,14);
+                printf("enter new email:");
+                gotoxy(31,14);
+                scanf("%s",&a.email);
+                gotoxy(15,15);
+                printf("The record is modified");
+                fseek(fp,ftell(fp)-sizeof(a),0);
+                fwrite(&a,sizeof(a),1,fp);
+                fclose(fp);
+                c=1;
+            }
+            if(c==0)
+            {
+                gotoxy(15,9);
+                printf("No record found");
+            }
+        }
+        gotoxy(15,16);
+        printf("Modify another Record?(Y/N)");
+        fflush(stdin);
+        another=getch() ;
+    }
+    returnfunc();
 }
 void deleteDonors(void)    //funtion that delete donor
 {
@@ -435,65 +571,65 @@ void deleteDonors(void)    //funtion that delete donor
     char another='y';
     while(another=='y')  //infinite loop
     {
-    system("cls");
-    gotoxy(10,5);
-    printf("Enter the Donar ID to  delete:");
-    scanf("%d",&d);
-    fp=fopen("Bibek.dat","rb+");
-    rewind(fp);
-    while(fread(&a,sizeof(a),1,fp)==1)
-    {
-        if(a.id==d)
-        {
-
-        gotoxy(10,7);
-        printf("The Donor record is available");
-        gotoxy(10,8);
-        printf("Donor name is %s",a.name);
-        findbook='t';
-        }
-    }
-    if(findbook!='t')
-    {
-        gotoxy(10,10);
-        printf("No record is found modify the search");
-        if(getch())
-        mainmenu();
-    }
-    if(findbook=='t' )
-    {
-        gotoxy(10,9);
-        printf("Do you want to delete it?(Y/N):");
-        if(getch()=='y')
-        {
-        ft=fopen("test.dat","wb+");  //temporary file for delete
+        system("cls");
+        gotoxy(10,5);
+        printf("Enter the Donar ID to  delete:");
+        scanf("%d",&d);
+        fp=fopen("Bibek.dat","rb+");
         rewind(fp);
         while(fread(&a,sizeof(a),1,fp)==1)
         {
-            if(a.id!=d)
+            if(a.id==d)
             {
-            fseek(ft,0,SEEK_CUR);
-            fwrite(&a,sizeof(a),1,ft); //write all in tempory file except that
-            }                              //we want to delete
+
+                gotoxy(10,7);
+                printf("The Donor record is available");
+                gotoxy(10,8);
+                printf("Donor name is %s",a.name);
+                findbook='t';
+            }
         }
-        fclose(ft);
-        fclose(fp);
-        remove("Bibek.dat");
-        rename("test.dat","Bibek.dat"); //copy all item from temporary file to fp except that
-        fp=fopen("Bibek.dat","rb+");    //we want to delete
-        if(findbook=='t')
+        if(findbook!='t')
         {
             gotoxy(10,10);
-            printf("The record is sucessfully deleted");
-            gotoxy(10,11);
-            printf("Delete another record?(Y/N)");
+            printf("No record is found modify the search");
+            if(getch())
+                mainmenu();
         }
+        if(findbook=='t' )
+        {
+            gotoxy(10,9);
+            printf("Do you want to delete it?(Y/N):");
+            if(getch()=='y')
+            {
+                ft=fopen("test.dat","wb+");  //temporary file for delete
+                rewind(fp);
+                while(fread(&a,sizeof(a),1,fp)==1)
+                {
+                    if(a.id!=d)
+                    {
+                        fseek(ft,0,SEEK_CUR);
+                        fwrite(&a,sizeof(a),1,ft); //write all in tempory file except that
+                    }                              //we want to delete
+                }
+                fclose(ft);
+                fclose(fp);
+                remove("Bibek.dat");
+                rename("test.dat","Bibek.dat"); //copy all item from temporary file to fp except that
+                fp=fopen("Bibek.dat","rb+");    //we want to delete
+                if(findbook=='t')
+                {
+                    gotoxy(10,10);
+                    printf("The record is sucessfully deleted");
+                    gotoxy(10,11);
+                    printf("Delete another record?(Y/N)");
+                }
+            }
+            else
+                mainmenu();
+            fflush(stdin);
+            another=getch();
         }
-    else
-    mainmenu();
-    fflush(stdin);
-    another=getch();
-    }
     }
     gotoxy(10,15);
     mainmenu();
