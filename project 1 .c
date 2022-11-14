@@ -22,7 +22,7 @@ void gotoxy (int x, int y)
 }
 
 char password[10]= {"nirob"};
-char findbook;
+char findDonar;
 
 
 FILE *fp,*ft;
@@ -234,7 +234,7 @@ int getdata()
     if(checkid(t) == 0)
     {
         gotoxy(21,13);
-        printf("\aThe book id already exists\a");
+        printf("\aThe donor id already exists\a");
         getch();
         mainmenu();
         return 0;
@@ -387,11 +387,11 @@ void searchDonor(void)    //funtion that add donors
                 gotoxy(20,16);
                 printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
                 printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-                findbook='t';
+                findDonar='t';
             }
 
         }
-        if(findbook!='t')  //checks whether conditiion enters inside loop or not
+        if(findDonar!='t')  //checks whether conditiion enters inside loop or not
         {
             gotoxy(20,8);
             printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
@@ -420,7 +420,7 @@ void searchDonor(void)    //funtion that add donors
         gotoxy(25,4);
         printf("****Search donors By Name****");
         gotoxy(20,5);
-        printf("Enter Book Name:");
+        printf("Enter Donor Name:");
         scanf("%s",s);
         int d=0;
         while(fread(&a,sizeof(a),1,fp)==1)
@@ -428,7 +428,7 @@ void searchDonor(void)    //funtion that add donors
             if(strcmp(a.name,(s))==0) //checks whether a.name is equal to s or not
             {
                 gotoxy(20,7);
-                printf("The Book is available");
+                printf("The donor is available");
                 gotoxy(20,8);
                 printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
                 printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
@@ -583,17 +583,17 @@ void deleteDonors(void)    //funtion that delete donor
                 printf("The Donor record is available");
                 gotoxy(10,8);
                 printf("Donor name is %s",a.name);
-                findbook='t';
+                findDonar='t';
             }
         }
-        if(findbook!='t')
+        if(findDonar!='t')
         {
             gotoxy(10,10);
             printf("No record is found modify the search");
             if(getch())
                 mainmenu();
         }
-        if(findbook=='t' )
+        if(findDonar=='t' )
         {
             gotoxy(10,9);
             printf("Do you want to delete it?(Y/N):");
@@ -614,7 +614,7 @@ void deleteDonors(void)    //funtion that delete donor
                 remove("Bibek.dat");
                 rename("test.dat","Bibek.dat"); //copy all item from temporary file to fp except that
                 fp=fopen("Bibek.dat","rb+");    //we want to delete
-                if(findbook=='t')
+                if(findDonar=='t')
                 {
                     gotoxy(10,10);
                     printf("The record is sucessfully deleted");
