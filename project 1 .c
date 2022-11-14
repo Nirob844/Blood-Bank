@@ -35,9 +35,6 @@ struct donorsList
     char bloodGroup[20];
     int numberOfBloodD;
     char date[20];
-    /*int dd;
-    int mm;
-    int yy;*/
     long long int phNumber;
     char email[30];
     char *cat;
@@ -55,11 +52,11 @@ int main()
 void mainmenu()
 {
     system("cls");
-    system("COLOR F2");
+   // system("COLOR F2");
     int i;
     gotoxy(20,3);
     printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 MAIN MENU");
-    printf(" \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+   printf(" \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     gotoxy(20,5);
     printf("\xDB\xDB\xDB\xDB\xB2 1. Add New Donors ");
     gotoxy(20,7);
