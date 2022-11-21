@@ -15,6 +15,7 @@ void editDonar(void);
 void deleteDonors(void);
 void bloodRequest(void);
 void viewListOfRequestBlood(void);
+void approveBloodRequest(void);
 void gotoxy(int x, int y);
 
 COORD coord = {0, 0}; // sets coordinates to 0,0
@@ -298,7 +299,7 @@ void addNewDonors(void) // funtion that add donors
     system("cls");
     int i;
     system("cls");
-    fp = fopen("Bibek.dat", "ab+");
+    fp = fopen("Donar.dat", "ab+");
     if (getdata() == 1)
     {
         fseek(fp, 0, SEEK_END);
@@ -426,7 +427,7 @@ void viewListOfDonor(void) // funtion that view donor
     gotoxy(2, 2);
     printf("     ID    DONAR NAME  BLOOD GROUP  N.OF DONATION  Last Date  PH.NUMBER    EMAIL ");
     j = 4;
-    fp = fopen("Bibek.dat", "rb");
+    fp = fopen("Donar.dat", "rb");
     while (fread(&a, sizeof(a), 1, fp) == 1)
     {
         gotoxy(3, j);
@@ -473,7 +474,7 @@ void searchDonor(void) // funtion that add donors
     printf("\xDB\xDB\xDB\xB2 2. Search By Name");
     gotoxy(15, 20);
     printf("Enter Your Choice");
-    fp = fopen("Bibek.dat", "rb+"); // open file for reading propose
+    fp = fopen("Donar.dat", "rb+"); // open file for reading propose
     rewind(fp);                     // move pointer at the begining of file
     switch (getch())
     {
@@ -650,7 +651,7 @@ void editDonar(void) // funtion that add Donars
         gotoxy(15, 6);
         printf("Enter Donar Id to be edited:");
         scanf("%d", &d);
-        fp = fopen("Bibek.dat", "rb+");
+        fp = fopen("Donar.dat", "rb+");
         while (fread(&a, sizeof(a), 1, fp) == 1)
         {
             if (checkid(d) == 0)
@@ -709,7 +710,7 @@ void deleteDonors(void) // funtion that delete donor
         gotoxy(10, 5);
         printf("Enter the Donar ID to  delete:");
         scanf("%d", &d);
-        fp = fopen("Bibek.dat", "rb+");
+        fp = fopen("Donar.dat", "rb+");
         rewind(fp);
         while (fread(&a, sizeof(a), 1, fp) == 1)
         {
@@ -748,9 +749,9 @@ void deleteDonors(void) // funtion that delete donor
                 }
                 fclose(ft);
                 fclose(fp);
-                remove("Bibek.dat");
-                rename("test.dat", "Bibek.dat"); // copy all item from temporary file to fp except that
-                fp = fopen("Bibek.dat", "rb+");  // we want to delete
+                remove("Donar.dat");
+                rename("test.dat", "Donar.dat"); // copy all item from temporary file to fp except that
+                fp = fopen("Donar.dat", "rb+");  // we want to delete
                 if (findDonar == 't')
                 {
                     gotoxy(10, 10);
