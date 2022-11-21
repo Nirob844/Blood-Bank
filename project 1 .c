@@ -31,7 +31,7 @@ char upassword[10] = {"user"};
 char password[10] = {"nirob"};
 char findDonar;
 
-FILE *fp, *ft, *fr;
+FILE *fp, *ft, *fr, *fa;
 int s;
 
 struct donorsList
@@ -231,6 +231,9 @@ void adminMenu()
         viewListOfRequestBlood();
         break;
     case '7':
+        approveBloodRequest();
+        break;
+    case '8':
         mainMenu();
         break;
 
@@ -257,9 +260,11 @@ void userMenu()
     gotoxy(20, 7);
     printf("\xDB\xDB\xDB\xDB\xB2 2. Request Blood ");
     gotoxy(20, 9);
-    printf("\xDB\xDB\xDB\xDB\xB2 3.mainMenu Application");
+    printf("\xDB\xDB\xDB\xDB\xB2 3.view blood request");
     gotoxy(20, 11);
-    printf("\xDB\xDB\xDB\xDB\xB2 4. Close Application");
+    printf("\xDB\xDB\xDB\xDB\xB2 4.mainMenu Application");
+    gotoxy(20, 13);
+    printf("\xDB\xDB\xDB\xDB\xB2 5. Close Application");
     gotoxy(20, 19);
     printf("------------------------------------------");
     gotoxy(20, 21);
@@ -274,9 +279,12 @@ void userMenu()
     case '2':
         bloodRequest();
     case '3':
-        mainMenu();
+        viewListOfRequestBlood();
         break;
     case '4':
+        mainMenu();
+        break;
+    case '5':
     {
         system("cls");
         gotoxy(16, 3);
@@ -858,7 +866,7 @@ void bloodRequest(void)
     gotoxy(21, 15);
     printf("Save any more?(Y / N):");
     if (getch() == 'n')
-        adminMenu();
+        mainMenu();
     else
         system("cls");
     bloodRequest();
@@ -894,4 +902,75 @@ void viewListOfRequestBlood(void)
     fclose(fp);
     gotoxy(35, 25);
     returnFunction();
+}
+void approveBloodRequest(void)
+{
+    system("cls");
+    int d = 0;
+    char s[20];
+    char another = 'y';
+    while (another == 'y') // infinite loop
+    {
+        system("cls");
+        gotoxy(10, 5);
+        printf("Enter the patient Name to  Approve Request:");
+        scanf("%s", &s);
+        fr = fopen("request.dat", "rb+");
+        rewind(fr);
+        while (fread(&a, sizeof(a), 1, fr) == 1)
+        {
+            if (strcmp(a.name, (s)) == 0)
+            {
+
+                gotoxy(10, 7);
+                printf("The patient request is available");
+                gotoxy(10, 8);
+                printf("patient blood group is %s", a.bloodGroup);
+                d++;
+            }
+        }
+        if (d == 0)
+        {
+            gotoxy(10, 10);
+            printf("No record is found modify the search");
+            if (getch())
+                adminMenu();
+        }
+        if (strcmp(a.name, (s)) == 0)
+        {
+            gotoxy(10, 9);
+            printf("Do you want to delete it?(Y/N):");
+            if (getch() == 'y')
+            {
+                fa = fopen("approve.dat", "wb+"); // temporary file for delete
+                rewind(fr);
+                while (fread(&a, sizeof(a), 1, fr) == 1)
+                {
+                    if (strcmp(a.name, (s)) == 0)
+                    {
+                        fseek(fa, 0, SEEK_CUR);
+                        fwrite(&a, sizeof(a), 1, fa); // write all in tempory file except that
+                    }                                 // we want to delete
+                }
+                fclose(fa);
+                fclose(fr);
+                remove("request.dat");
+                rename("approve.dat", "request.dat"); // copy all item from temporary file to fp except that
+                fp = fopen("Donar.dat", "rb+");       // we want to delete
+                if (strcmp(a.name, (s)) == 0)
+                {
+                    gotoxy(10, 10);
+                    printf("The record is sucessfully approve");
+                    gotoxy(10, 11);
+                    printf("approve another record?(Y/N)");
+                }
+            }
+            else
+                adminMenu();
+            fflush(stdin);
+            another = getch();
+        }
+    }
+    gotoxy(10, 15);
+    adminMenu();
 }
