@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <time.h>
 
-void home(void);
+void mainMenu(void);
 void AdminPassword();
 void userPassword(void);
 void Password();
@@ -50,11 +50,11 @@ struct donorsList a;
 int main()
 
 {
-    home();
+    mainMenu();
     getch();
     return 0;
 }
-void home()
+void mainMenu()
 {
     system("cls");
     // system("COLOR F2");
@@ -95,7 +95,7 @@ void home()
         gotoxy(10, 23);
         printf("\aWrong Entry!!Please re-entered correct option");
         if (getch())
-            home();
+            mainMenu();
     }
     }
 }
@@ -202,7 +202,7 @@ void adminMenu()
     gotoxy(20, 17);
     printf("\xDB\xDB\xDB\xDB\xB2 7. Approve Blood Request");
     gotoxy(20, 19);
-    printf("\xDB\xDB\xDB\xDB\xB2 8. Home Application");
+    printf("\xDB\xDB\xDB\xDB\xB2 8. mainMenu Application");
     gotoxy(20, 21);
     printf("------------------------------------------");
     gotoxy(20, 23);
@@ -230,7 +230,7 @@ void adminMenu()
         viewListOfRequestBlood();
         break;
     case '7':
-        home();
+        mainMenu();
         break;
 
     default:
@@ -256,7 +256,7 @@ void userMenu()
     gotoxy(20, 7);
     printf("\xDB\xDB\xDB\xDB\xB2 2. Request Blood ");
     gotoxy(20, 9);
-    printf("\xDB\xDB\xDB\xDB\xB2 3.Home Application");
+    printf("\xDB\xDB\xDB\xDB\xB2 3.mainMenu Application");
     gotoxy(20, 11);
     printf("\xDB\xDB\xDB\xDB\xB2 4. Close Application");
     gotoxy(20, 19);
@@ -273,7 +273,7 @@ void userMenu()
     case '2':
         bloodRequest();
     case '3':
-        home();
+        mainMenu();
         break;
     case '4':
     {
@@ -458,7 +458,7 @@ void returnFunction(void)
     }
 a:
     if (getch() == 13) // allow only use of enter
-        home();
+        mainMenu();
     else
         goto a;
 }
@@ -877,15 +877,15 @@ void viewListOfRequestBlood(void)
         gotoxy(3, j);
         gotoxy(10, j);
         printf("%s", a.name);
-        gotoxy(27, j);
+        gotoxy(25, j);
         printf("%s", a.bloodGroup);
-        gotoxy(42, j);
+        gotoxy(35, j);
         printf("%s", a.address);
-        gotoxy(54, j);
+        gotoxy(50, j);
         printf("%s", a.date);
         gotoxy(64, j);
         printf("%lld", a.phNumber);
-        gotoxy(77, j);
+        gotoxy(79, j);
         printf("%s", a.email);
         printf("\n\n");
         j++;
