@@ -8,7 +8,7 @@ void userPassword(void);
 void Password();
 void adminMenu(void);
 void userMenu(void);
-void addNewDonors(void);
+void donarRegistration(void);
 void viewListOfDonor(void);
 void searchDonor(void);
 void editDonar(void);
@@ -186,10 +186,10 @@ void adminMenu()
     // system("COLOR F2");
     int i;
     gotoxy(20, 3);
-    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 MAIN MENU");
+    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 ADMIN MENU");
     printf(" \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     gotoxy(20, 5);
-    printf("\xDB\xDB\xDB\xDB\xB2 1. Add New Donors ");
+    printf("\xDB\xDB\xDB\xDB\xB2 1. Donar Registration ");
     gotoxy(20, 7);
     printf("\xDB\xDB\xDB\xDB\xB2 2. View List Of Donors ");
     gotoxy(20, 9);
@@ -213,7 +213,7 @@ void adminMenu()
     switch (getch())
     {
     case '1':
-        addNewDonors();
+        donarRegistration();
         break;
     case '2':
         viewListOfDonor();
@@ -253,16 +253,16 @@ void userMenu()
     // system("COLOR F2");
     int i;
     gotoxy(20, 3);
-    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 MAIN MENU");
+    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 USER MENU");
     printf(" \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     gotoxy(20, 5);
-    printf("\xDB\xDB\xDB\xDB\xB2 1. View List Of Donor ");
+    printf("\xDB\xDB\xDB\xDB\xB2 1. Donar Registration ");
     gotoxy(20, 7);
-    printf("\xDB\xDB\xDB\xDB\xB2 2. Request Blood ");
+    printf("\xDB\xDB\xDB\xDB\xB2 2. Donar available Now ");
     gotoxy(20, 9);
-    printf("\xDB\xDB\xDB\xDB\xB2 3.view blood request");
+    printf("\xDB\xDB\xDB\xDB\xB2 3. Request Blood ");
     gotoxy(20, 11);
-    printf("\xDB\xDB\xDB\xDB\xB2 4.mainMenu Application");
+    printf("\xDB\xDB\xDB\xDB\xB2 4.Main Menu Application");
     gotoxy(20, 13);
     printf("\xDB\xDB\xDB\xDB\xB2 5. Close Application");
     gotoxy(20, 19);
@@ -274,12 +274,12 @@ void userMenu()
     switch (getch())
     {
     case '1':
-        viewListOfDonor();
+        donarRegistration();
         break;
     case '2':
-        bloodRequest();
+        viewListOfDonor();
     case '3':
-        viewListOfRequestBlood();
+        bloodRequest();
         break;
     case '4':
         mainMenu();
@@ -302,7 +302,7 @@ void userMenu()
     }
 }
 
-void addNewDonors(void) // funtion that add donors
+void donarRegistration(void) // funtion that add donors
 {
     system("cls");
     int i;
@@ -318,10 +318,10 @@ void addNewDonors(void) // funtion that add donors
         gotoxy(21, 15);
         printf("Save any more?(Y / N):");
         if (getch() == 'n')
-            adminMenu();
+            mainMenu();
         else
             system("cls");
-        addNewDonors();
+        donarRegistration();
     }
 }
 int getdata()
@@ -901,7 +901,7 @@ void viewListOfRequestBlood(void)
     }
     fclose(fp);
     gotoxy(35, 25);
-    returnFunction();
+    adminMenu();
 }
 void approveBloodRequest(void)
 {
@@ -939,7 +939,7 @@ void approveBloodRequest(void)
         if (strcmp(a.name, (s)) == 0)
         {
             gotoxy(10, 9);
-            printf("Do you want to delete it?(Y/N):");
+            printf("Do you approve it?(Y/N):");
             if (getch() == 'y')
             {
                 fa = fopen("approve.dat", "wb+"); // temporary file for delete
@@ -956,7 +956,7 @@ void approveBloodRequest(void)
                 fclose(fr);
                 remove("request.dat");
                 rename("approve.dat", "request.dat"); // copy all item from temporary file to fp except that
-                fp = fopen("Donar.dat", "rb+");       // we want to delete
+                fr = fopen("request.dat", "rb+");     // we want to delete
                 if (strcmp(a.name, (s)) == 0)
                 {
                     gotoxy(10, 10);
