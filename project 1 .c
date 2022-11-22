@@ -901,7 +901,7 @@ void viewListOfRequestBlood(void)
     }
     fclose(fp);
     gotoxy(35, 25);
-    adminMenu();
+    returnFunction();
 }
 void approveBloodRequest(void)
 {
