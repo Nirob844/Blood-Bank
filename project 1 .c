@@ -318,7 +318,7 @@ void donarRegistration(void) // funtion that add donors
         gotoxy(21, 15);
         printf("Save any more?(Y / N):");
         if (getch() == 'n')
-            mainMenu();
+            adminMenu();
         else
             system("cls");
         donarRegistration();
