@@ -44,7 +44,7 @@ struct donorsList
     long long int phNumber;
     char email[30];
     char address[30];
-    char *cat;
+    //char *cat;
 };
 struct donorsList a;
 
@@ -318,7 +318,7 @@ void donarRegistration(void) // funtion that add donors
         gotoxy(21, 15);
         printf("Save any more?(Y / N):");
         if (getch() == 'n')
-            adminMenu();
+            mainMenu();
         else
             system("cls");
         donarRegistration();
