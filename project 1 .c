@@ -44,7 +44,7 @@ struct donorsList
     long long int phNumber;
     char email[30];
     char address[30];
-    //char *cat;
+    // char *cat;
 };
 struct donorsList a;
 
@@ -58,7 +58,7 @@ int main()
 void mainMenu()
 {
     system("cls");
-    // system("COLOR F2");
+    system("COLOR F5");
     int i;
     gotoxy(20, 3);
     printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 MAIN MENU");
@@ -183,13 +183,13 @@ void userPassword(void) // for password option
 void adminMenu()
 {
     system("cls");
-    // system("COLOR F2");
+    system("COLOR F5");
     int i;
     gotoxy(20, 3);
     printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 ADMIN MENU");
     printf(" \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     gotoxy(20, 5);
-    printf("\xDB\xDB\xDB\xDB\xB2 1. Donar Registration ");
+    printf("\xDB\xDB\xDB\xDB\xB2 1. Add New Donor ");
     gotoxy(20, 7);
     printf("\xDB\xDB\xDB\xDB\xB2 2. View List Of Donors ");
     gotoxy(20, 9);
@@ -203,7 +203,7 @@ void adminMenu()
     gotoxy(20, 17);
     printf("\xDB\xDB\xDB\xDB\xB2 7. Approve Blood Request");
     gotoxy(20, 19);
-    printf("\xDB\xDB\xDB\xDB\xB2 8. mainMenu Application");
+    printf("\xDB\xDB\xDB\xDB\xB2 8. Main Menu Application");
     gotoxy(20, 21);
     printf("------------------------------------------");
     gotoxy(20, 23);
@@ -250,7 +250,7 @@ void adminMenu()
 void userMenu()
 {
     system("cls");
-    // system("COLOR F2");
+    system("COLOR F5");
     int i;
     gotoxy(20, 3);
     printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 USER MENU");
@@ -263,8 +263,6 @@ void userMenu()
     printf("\xDB\xDB\xDB\xDB\xB2 3. Request Blood ");
     gotoxy(20, 11);
     printf("\xDB\xDB\xDB\xDB\xB2 4.Main Menu Application");
-    gotoxy(20, 13);
-    printf("\xDB\xDB\xDB\xDB\xB2 5. Close Application");
     gotoxy(20, 19);
     printf("------------------------------------------");
     gotoxy(20, 21);
@@ -284,14 +282,6 @@ void userMenu()
     case '4':
         mainMenu();
         break;
-    case '5':
-    {
-        system("cls");
-        gotoxy(16, 3);
-        printf("Thanks for using the Program..");
-        gotoxy(10, 7);
-        exit(0);
-    }
     default:
     {
         gotoxy(10, 23);
@@ -458,9 +448,9 @@ void viewListOfDonor(void) // funtion that view donor
     }
     fclose(fp);
     gotoxy(35, 25);
-    returnFunction();
+    returnMainFunction();
 }
-void returnFunction(void)
+void returnMainFunction(void)
 {
     {
         printf(" Press ENTER to return to main menu");
@@ -471,7 +461,30 @@ a:
     else
         goto a;
 }
-void searchDonor(void) // funtion that add donors
+void returnAdminFunction(void)
+{
+    {
+        printf(" Press ENTER to return to admin menu");
+    }
+a:
+    if (getch() == 13) // allow only use of enter
+        adminMenu();
+    else
+        goto a;
+}
+void returnUserFunction(void)
+{
+    {
+        printf(" Press ENTER to return to user menu");
+    }
+a:
+    if (getch() == 13) // allow only use of enter
+        mainMenu();
+    else
+        goto a;
+}
+
+void searchDonor(void) // function that add donors
 {
     system("cls");
     int d;
@@ -705,7 +718,7 @@ void editDonar(void) // funtion that add Donars
         fflush(stdin);
         another = getch();
     }
-    returnFunction();
+    returnMainFunction();
 }
 void deleteDonors(void) // funtion that delete donor
 {
@@ -862,11 +875,11 @@ void bloodRequest(void)
     fwrite(&a, sizeof(a), 1, fr);
     fclose(fr);
     gotoxy(21, 14);
-    printf("The record is sucessfully saved");
+    printf("The record is successfully saved");
     gotoxy(21, 15);
     printf("Save any more?(Y / N):");
     if (getch() == 'n')
-        mainMenu();
+        userMenu();
     else
         system("cls");
     bloodRequest();
@@ -901,7 +914,7 @@ void viewListOfRequestBlood(void)
     }
     fclose(fp);
     gotoxy(35, 25);
-    returnFunction();
+    returnAdminFunction();
 }
 void approveBloodRequest(void)
 {
@@ -960,7 +973,7 @@ void approveBloodRequest(void)
                 if (strcmp(a.name, (s)) == 0)
                 {
                     gotoxy(10, 10);
-                    printf("The record is sucessfully approve");
+                    printf("The record is successfully approve");
                     gotoxy(10, 11);
                     printf("approve another record?(Y/N)");
                 }
